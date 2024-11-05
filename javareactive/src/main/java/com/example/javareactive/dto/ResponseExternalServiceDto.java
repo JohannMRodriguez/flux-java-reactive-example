@@ -1,5 +1,6 @@
 package com.example.javareactive.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,5 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseExternalServiceDto {
-    private String something;
+    @JsonProperty("json")
+    private String responseExample;
 }

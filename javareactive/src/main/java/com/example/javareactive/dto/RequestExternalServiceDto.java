@@ -10,5 +10,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestExternalServiceDto {
-    private List<String> anotherthing;
+    private List<String> requestExample;
 }
