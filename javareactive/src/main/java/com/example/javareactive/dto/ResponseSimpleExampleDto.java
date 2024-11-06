@@ -9,6 +9,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RequestExternalServiceDto {
-    private List<String> dataList;
+public class ResponseSimpleExampleDto {
+    private List<String> data;
 }

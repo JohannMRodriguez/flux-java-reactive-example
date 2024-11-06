@@ -2,6 +2,8 @@ package com.example.javareactive.controller;
 
 import com.example.javareactive.dto.RequestExternalServiceDto;
 import com.example.javareactive.dto.ResponseExternalServiceDto;
+import com.example.javareactive.dto.ResponseFluxExampleDto;
+import com.example.javareactive.dto.ResponseSimpleExampleDto;
 import com.example.javareactive.service.ExampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -19,18 +21,18 @@ public class ExampleController {
     private ExampleService service;
 
     @PostMapping("/1")
-    public ResponseExternalServiceDto exampleWithoutFlux(
+    public ResponseSimpleExampleDto exampleWithoutFlux(
             @RequestBody RequestExternalServiceDto request
             ) throws IOException {
 
         return service.callExternalServiceWithoutFlux(request);
     }
 
-//    @PostMapping("/2")
-//    public ResponseExternalServiceDto exampleWithFlux(
-//            @RequestBody RequestExternalServiceDto request
-//    ) throws IOException {
-//
-//        return service.callExternalServiceWithFlux(request);
-//    }
+    @PostMapping("/2")
+    public ResponseFluxExampleDto exampleWithFlux(
+            @RequestBody RequestExternalServiceDto request
+    ) throws IOException {
+
+        return service.callExternalServiceWithFlux(request);
+    }
 }
