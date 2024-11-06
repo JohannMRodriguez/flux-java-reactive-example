@@ -19,17 +19,18 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class ExampleService {
-    private ExampleRestInterface restInterface;
+    private final ExampleRestInterface restInterface;
 
     public ResponseExternalServiceDto callExternalServiceWithoutFlux(RequestExternalServiceDto request) throws IOException {
 
         var response = new ArrayList<>();
 
-        request.getRequestExample().forEach(
+        request.getJson().forEach(
                 each -> {
                     try {
                         Response<ResponseExternalServiceDto> httpResponse = restInterface.callExternalService(each).execute();
-                        response.add(httpResponse.body());
+//                        response.add(httpResponse.body().getJson());
+                        System.out.println(httpResponse.body().getJson());
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -40,29 +41,29 @@ public class ExampleService {
 
         return new ResponseExternalServiceDto();
     }
-    public ResponseExternalServiceDto callExternalServiceWithFlux(RequestExternalServiceDto request) throws IOException {
-
-        List<String> status = new ArrayList<>();
-
-        Flux.fromIterable(request.getRequestExample())
-                .parallel()
-                .runOn(Schedulers.parallel())
-                .flatMap(this::callExternalApi)
-                .sequential()
-                .doOnNext(status::add)
-                .blockLast();
-
-        System.out.println(status);
-
-        return new ResponseExternalServiceDto();
-    }
-
-    private Mono<String> callExternalApi(String each) {
-
-        return Mono.fromCallable(() -> {
-            Response<ResponseExternalServiceDto> httpResponse = restInterface.callExternalService(each).execute();
-            return httpResponse.body().getResponseExample();
-
-        }).subscribeOn(Schedulers.boundedElastic());
-    }
+//    public ResponseExternalServiceDto callExternalServiceWithFlux(RequestExternalServiceDto request) throws IOException {
+//
+//        List<String> status = new ArrayList<>();
+//
+//        Flux.fromIterable(request.getRequestExample())
+//                .parallel()
+//                .runOn(Schedulers.parallel())
+//                .flatMap(this::callExternalApi)
+//                .sequential()
+//                .doOnNext(status::add)
+//                .blockLast();
+//
+//        System.out.println(status);
+//
+//        return new ResponseExternalServiceDto();
+//    }
+//
+//    private Mono<String> callExternalApi(String each) {
+//
+//        return Mono.fromCallable(() -> {
+//            Response<ResponseExternalServiceDto> httpResponse = restInterface.callExternalService(each).execute();
+//            return httpResponse.body().getJson().getJson();
+//
+//        }).subscribeOn(Schedulers.boundedElastic());
+//    }
 }

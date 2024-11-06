@@ -32,8 +32,10 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 	implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+	implementation('com.squareup.retrofit2:converter-jackson:2.7.2')
 
 	implementation group: 'io.projectreactor', name: 'reactor-core', version: '3.6.10'
+
 
 }
 

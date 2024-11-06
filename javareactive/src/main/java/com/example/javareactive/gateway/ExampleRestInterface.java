@@ -10,6 +10,6 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface ExampleRestInterface {
-    @POST("https://httpbin.org/anything")
+    @POST("/anything")
     Call<ResponseExternalServiceDto> callExternalService(@Body String request);
 }

@@ -9,6 +9,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RequestExternalServiceDto {
+public class JsonResponse {
     private List<String> json;
 }

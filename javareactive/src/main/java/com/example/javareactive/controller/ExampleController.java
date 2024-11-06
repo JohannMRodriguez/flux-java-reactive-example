@@ -26,11 +26,11 @@ public class ExampleController {
         return service.callExternalServiceWithoutFlux(request);
     }
 
-    @PostMapping("/2")
-    public ResponseExternalServiceDto exampleWithFlux(
-            @RequestBody RequestExternalServiceDto request
-    ) throws IOException {
-
-        return service.callExternalServiceWithFlux(request);
-    }
+//    @PostMapping("/2")
+//    public ResponseExternalServiceDto exampleWithFlux(
+//            @RequestBody RequestExternalServiceDto request
+//    ) throws IOException {
+//
+//        return service.callExternalServiceWithFlux(request);
+//    }
 }
