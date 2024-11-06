@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Data
@@ -12,5 +13,5 @@ import java.util.List;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResponseExternalServiceDto {
-    private List<String> json;
+    private HashMap<String, String> json;
 }

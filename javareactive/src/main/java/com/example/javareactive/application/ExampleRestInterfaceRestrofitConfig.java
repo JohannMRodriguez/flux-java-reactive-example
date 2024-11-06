@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class ExampleRestInterfaceRestrofitConfig {
     @Value("${base.url}")
-    private String urlPrimitivas;
+    private String url;
     @Value("${connectTimeout:40}")
     private long connectTimeout;
     @Value("${readTimeout:40}")
@@ -26,12 +26,8 @@ public class ExampleRestInterfaceRestrofitConfig {
 
     @Bean
     public ExampleRestInterface getExampleRestInterface() {
-//        val logging = new HttpLoggingInterceptor();
-//
-//        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        log.info(GENERANDO_CLIENTE_DE_RETROFIT + " para el servicio de primitivas [{}]", urlPrimitivas);
-
+        log.info(GENERANDO_CLIENTE_DE_RETROFIT + " para el servicio de primitivas [{}]", url);
 
         val client = new OkHttpClient.Builder()
                 .connectTimeout(connectTimeout, TimeUnit.SECONDS)
@@ -41,7 +37,7 @@ public class ExampleRestInterfaceRestrofitConfig {
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(urlPrimitivas)
+                .baseUrl(url)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .client(client)
                 .build();

@@ -3,6 +3,7 @@ package com.example.javareactive.service;
 import com.example.javareactive.dto.RequestExternalServiceDto;
 import com.example.javareactive.dto.ResponseExternalServiceDto;
 import com.example.javareactive.gateway.ExampleRestInterface;
+import kotlin.collections.builders.MapBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,23 +25,23 @@ public class ExampleService {
 
     public ResponseExternalServiceDto callExternalServiceWithoutFlux(RequestExternalServiceDto request) throws IOException {
 
-        var response = new ArrayList<>();
+        var responseList = new HashMap<String, String>();
+        var response = new ResponseExternalServiceDto();
 
         request.getJson().forEach(
                 each -> {
                     try {
-                        Response<ResponseExternalServiceDto> httpResponse = restInterface.callExternalService(each).execute();
-//                        response.add(httpResponse.body().getJson());
-                        System.out.println(httpResponse.body().getJson());
+                        System.out.println(each);
+                        var httpResponse = restInterface.callExternalService(each).execute().body();
+                        responseList.put(each, httpResponse.getJson().toString());
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                 }
         );
 
-        System.out.println(response);
-
-        return new ResponseExternalServiceDto();
+        response.setJson(responseList);
+        return response;
     }
 //    public ResponseExternalServiceDto callExternalServiceWithFlux(RequestExternalServiceDto request) throws IOException {
 //
