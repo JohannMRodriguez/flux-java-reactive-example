@@ -5,6 +5,7 @@ import com.example.javareactive.dto.ResponseExternalServiceDto;
 import com.example.javareactive.dto.ResponseFluxExampleDto;
 import com.example.javareactive.dto.ResponseSimpleExampleDto;
 import com.example.javareactive.gateway.ExampleRestInterface;
+import kotlin.collections.builders.MapBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
